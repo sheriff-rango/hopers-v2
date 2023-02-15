@@ -174,11 +174,12 @@ const Win = () => {
         pos="absolute"
         bottom="1rem"
         right="1rem"
-        w="8rem"
+        minW="8rem"
         h="3rem"
         bg="white"
         rounded="1em"
-        px={1}
+        shadow="md"
+        px={2}
       >
         <HStack w="full" justify="start">
           <Image w="1.5rem" src="assets/cg.svg" />

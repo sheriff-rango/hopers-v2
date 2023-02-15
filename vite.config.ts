@@ -5,20 +5,25 @@ import { defineConfig, loadEnv } from "vite"
 import checker from "vite-plugin-checker"
 import { createHtmlPlugin } from "vite-plugin-html"
 import tsconfigPaths from "vite-tsconfig-paths"
-import * as pack from "./package.json"
 
-function renderChunks(deps) {
-  const chunks = {}
-  for (const key of Object.keys(deps)) {
-    if (["react", "react-router-dom", "react-dom"].includes(key)) {
-      continue
-    }
+// function renderChunks (deps) {
+//   const chunks = {};
+//   for (const key of Object.keys(deps)) {
+//     if ([
+//       'react',
+//       'react-router-dom',
+//       'react-dom',
+//     ].includes(key)) {
+//       continue;
+//     }
 
-    chunks[key] = [key]
-  }
+//     chunks[key] = [
+//       key,
+//     ];
+//   }
 
-  return chunks
-}
+//   return chunks;
+// }
 
 export default defineConfig(({ mode }) => {
   const environment = loadEnv(mode, "env")
@@ -29,12 +34,16 @@ export default defineConfig(({ mode }) => {
         transformMixedEsModules: true
       },
       rollupOptions: {
-        output: {
-          manualChunks: {
-            vendor: ["react", "react-router-dom", "react-dom"],
-            ...renderChunks(pack.dependencies)
-          }
-        },
+        // output: {
+        //   manualChunks: {
+        //     vendor: [
+        //       'react',
+        //       'react-router-dom',
+        //       'react-dom',
+        //     ],
+        //     ...renderChunks(dependencies),
+        //   },
+        // },
         plugins: [nodePolyfills()]
       },
       sourcemap: false

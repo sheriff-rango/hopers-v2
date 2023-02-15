@@ -7,7 +7,8 @@ import {
   Image,
   Tag,
   HStack,
-  VStack
+  VStack,
+  Button
 } from "@chakra-ui/react"
 import { useMemo } from "react"
 import { FaBan, FaClock, FaPlayCircle } from "react-icons/fa"
@@ -121,39 +122,74 @@ export const PredictionGameCard = ({
           UP
         </Heading>
       </VStack>
-      <Flex
-        w="14.5rem"
-        h="8rem"
-        justify="center"
-        gap={0}
-        bg="white"
-        zIndex={2}
-        rounded="1em"
-        shadow="md"
-        top="calc(50% - 3rem)"
-        left="calc(50% - 7.25rem)"
-        pos="absolute"
-        flexDirection="column"
-        px={3}
-        py={1}
-      >
-        <Text fontSize="13">Last Price</Text>
-        <Flex justifyContent="space-between">
-          <Heading fontSize="26">$0.00</Heading>
-          <Tag>$0.00</Tag>
+      {gameStatus === "next" ? (
+        <Flex
+          w="14.5rem"
+          h="9rem"
+          justify="center"
+          gap={0}
+          bg="white"
+          zIndex={2}
+          rounded="1em"
+          shadow="md"
+          top="calc(50% - 3.5rem)"
+          left="calc(50% - 7.25rem)"
+          pos="absolute"
+          flexDirection="column"
+          px={3}
+          py={1}
+        >
+          <Flex fontWeight="600" fontSize="16" justifyContent="space-between">
+            <Text>Prize Pool:</Text>
+            <HStack spacing={0.5}>
+              <Text>20</Text>
+              <Image w="1.5rem" src="/assets/logo_transparent.png" />
+            </HStack>
+          </Flex>
+          <VStack w="full" pt={1}>
+            <Button colorScheme="green" shadow="md" w="full">
+              Junø Pumps
+            </Button>
+            <Button colorScheme="red" shadow="md" w="full">
+              Junø Dumps
+            </Button>
+          </VStack>
         </Flex>
-        <Flex pt={3} fontSize="13" justifyContent="space-between">
-          <Text>Locked Price:</Text>
-          <Text>$0.00</Text>
+      ) : (
+        <Flex
+          w="14.5rem"
+          h="8rem"
+          justify="center"
+          gap={0}
+          bg="white"
+          zIndex={2}
+          rounded="1em"
+          shadow="md"
+          top="calc(50% - 3rem)"
+          left="calc(50% - 7.25rem)"
+          pos="absolute"
+          flexDirection="column"
+          px={3}
+          py={1}
+        >
+          <Text fontSize="13">Last Price</Text>
+          <Flex justifyContent="space-between">
+            <Heading fontSize="26">$0.00</Heading>
+            <Tag>$0.00</Tag>
+          </Flex>
+          <Flex pt={3} fontSize="13" justifyContent="space-between">
+            <Text>Locked Price:</Text>
+            <Text>$0.00</Text>
+          </Flex>
+          <Flex fontWeight="600" fontSize="16" justifyContent="space-between">
+            <Text>Prize Pool:</Text>
+            <HStack spacing={0.5}>
+              <Text>20</Text>
+              <Image w="1.5rem" src="/assets/logo_transparent.png" />
+            </HStack>
+          </Flex>
         </Flex>
-        <Flex fontWeight="600" fontSize="16" justifyContent="space-between">
-          <Text>Prize Pool:</Text>
-          <HStack spacing={0.5}>
-            <Text>20</Text>
-            <Image w="1.5rem" src="/assets/logo_transparent.png" />
-          </HStack>
-        </Flex>
-      </Flex>
+      )}
       <VStack
         bottom="2rem"
         left="calc(50% - 7.25rem)"
