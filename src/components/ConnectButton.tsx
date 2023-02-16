@@ -129,6 +129,8 @@ const ConnectButton: FC<ConnectButtonProps> = () => {
 
   const textColor = useColorModeValue("white", "white")
 
+  const isMobile = Boolean(breakpoint === "base" || breakpoint === "sm")
+
   return (
     <Button
       _active={isWalletConnected ? {} : { filter: "brightness(120%)" }}
@@ -142,7 +144,7 @@ const ConnectButton: FC<ConnectButtonProps> = () => {
       bgSize="100% 100%"
       color={textColor}
       as={motion.div}
-      w={{ base: "5rem", md: "10rem" }}
+      w={{ base: "6rem", md: "10rem" }}
       h="3.5rem"
       onClick={async () => {
         if (isWalletConnected) return
@@ -233,7 +235,7 @@ const ConnectButton: FC<ConnectButtonProps> = () => {
               exit="hide"
               variants={connectWalletVariants}
             >
-              Connect Wallet
+              Connect {!isMobile && "Wallet"}
             </Text>
           )}
         </AnimatePresence>

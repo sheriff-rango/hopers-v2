@@ -27,6 +27,7 @@ import { motion } from "framer-motion"
 import { useCallback, useRef, useState } from "react"
 import { BsHouseFill } from "react-icons/bs"
 import { FaUserFriends, FaParachuteBox, FaStore } from "react-icons/fa"
+import { HiOutlineMenuAlt3 } from "react-icons/hi"
 import { MdFullscreen, MdFullscreenExit } from "react-icons/md"
 import { useLocation } from "react-router-dom"
 import { useRecoilState } from "recoil"
@@ -144,13 +145,7 @@ export const RouterArea = () => {
   }
 
   return (
-    <Flex
-      ref={ref}
-      justify="start"
-      align="start"
-      pos="relative"
-      left={isMobile ? 8 : 0}
-    >
+    <Flex ref={ref} justify="start" align="start" pos="relative">
       {isMobile ? (
         <Menu>
           {({ isOpen, onClose }) => (
@@ -158,31 +153,20 @@ export const RouterArea = () => {
               <MenuButton
                 isActive={isOpen}
                 as={IconButton}
-                rounded="full"
+                rounded="1.25em"
                 minWidth="2rem"
-                h={{ base: "2rem", md: "4rem" }}
-                w={{ base: "2rem", md: "4rem" }}
-                icon={
-                  <MenuButton
-                    isOpen={isOpen}
-                    strokeWidth="2"
-                    color={textColor}
-                    lineProps={{ strokeLinecap: "round" }}
-                    // @ts-expect-error types
-                    transition={{ damping: 15, stiffness: 180, type: "spring" }}
-                    width="14"
-                    height="11"
-                  />
-                }
+                h={{ base: "3rem", md: "4rem" }}
+                w={{ base: "3rem", md: "4rem" }}
+                icon={<HiOutlineMenuAlt3 size="25" />}
               />
-              <Drawer placement="left" isOpen={isOpen} onClose={onClose}>
-                <DrawerOverlay />
+              <Drawer placement="right" isOpen={isOpen} onClose={onClose}>
+                <DrawerOverlay bg="transparent" backdropFilter="blur(20px)" />
                 <DrawerContent
-                  roundedEnd="3xl"
+                  roundedStart="2em"
                   overflow="hidden"
                   bgGradient={menuColor}
                 >
-                  <DrawerBody px={3}>
+                  <DrawerBody px={3} bg="offwhite.3" _dark={{ bg: "gray.700" }}>
                     <Flex gap={1} direction="column">
                       {data.map((props: NavigationButtonProps) => {
                         return (
