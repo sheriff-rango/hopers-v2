@@ -14,11 +14,19 @@ import { MotionFlex } from "components/MenuToggle"
 import { useEffect, useMemo } from "react"
 import { FaBan, FaClock, FaPlayCircle } from "react-icons/fa"
 import { getTokenPriceCoinGecko } from "utils/prices/getTokenPrice"
+import { CountdownTimer } from "./CountdownTimer"
+
+import dayjs from "dayjs"
+import duration from "dayjs/plugin/duration"
+
+dayjs.extend(duration)
 
 export const PredictionGameCard = ({
-  gameStatus
+  gameStatus,
+  time
 }: {
   gameStatus: "expired" | "live" | "next" | "later" | "calculating"
+  time?: number
 }) => {
   const gameIcon = useMemo(() => {
     switch (gameStatus) {
@@ -39,7 +47,8 @@ export const PredictionGameCard = ({
 
   useEffect(() => {
     console.log(
-      getTokenPriceCoinGecko({ tokenId: "juno-network", precision: 6 })
+      // getTokenPriceCoinGecko({ tokenId: "juno-network", precision: 6 })
+      dayjs().add(5, "m").unix()
     )
   })
 
@@ -50,6 +59,7 @@ export const PredictionGameCard = ({
       rounded="1em"
       bg="white"
       shadow="md"
+      _dark={{ bg: "gray.700" }}
       overflow="hidden"
       pos="relative"
       whileHover={{ opacity: 1 }}
@@ -70,6 +80,15 @@ export const PredictionGameCard = ({
             : "rgba(60,230,130, 1)"
         }
         bg={gameStatus === "next" ? "rgba(60,230,130, 1)" : "white"}
+        _dark={{
+          bg: gameStatus === "next" ? "rgba(60,230,130, 1)" : "gray.600",
+          color:
+            gameStatus === "next"
+              ? "gray.700"
+              : gameStatus === "expired"
+              ? "gray.300"
+              : "rgba(60,230,130, 1)"
+        }}
       >
         {gameIcon}
         <Text fontWeight="600">{gameStatus.toUpperCase()}</Text>
@@ -103,7 +122,12 @@ export const PredictionGameCard = ({
         borderRadius="0"
         zIndex={2}
         pos="absolute"
-        bg={`linear-gradient(
+        bg="gray.200"
+        _dark={{
+          bg: "gray.800",
+          bgImage:
+            gameStatus === "live" || gameStatus === "next"
+              ? `linear-gradient(
             0deg,
             hsl(341deg 100% 58%) 1%,
             hsl(355deg 100% 62%) 44%,
@@ -114,7 +138,25 @@ export const PredictionGameCard = ({
             hsl(63deg 100% 41%) 50%,
             hsl(81deg 100% 46%) 56%,
             hsl(103deg 100% 50%) 99%
-                )`}
+                )`
+              : `none`
+        }}
+        bgImage={
+          gameStatus === "live" || gameStatus === "next"
+            ? `linear-gradient(
+            0deg,
+            hsl(341deg 100% 58%) 1%,
+            hsl(355deg 100% 62%) 44%,
+            hsl(13deg 100% 59%) 50%,
+            hsl(29deg 100% 50%) 51%,
+            hsl(36deg 100% 50%) 50%,
+            hsl(47deg 100% 45%) 49%,
+            hsl(63deg 100% 41%) 50%,
+            hsl(81deg 100% 46%) 56%,
+            hsl(103deg 100% 50%) 99%
+                )`
+            : `none`
+        }
         w="13rem"
         top="calc(50% - 7rem)"
         left="calc(50% - 6.5rem)"
@@ -139,6 +181,7 @@ export const PredictionGameCard = ({
           justify="center"
           gap={0}
           bg="white"
+          _dark={{ bg: "gray.600" }}
           zIndex={2}
           rounded="1em"
           shadow="md"
@@ -157,10 +200,10 @@ export const PredictionGameCard = ({
             </HStack>
           </Flex>
           <VStack w="full" pt={1}>
-            <Button colorScheme="green" shadow="md" w="full">
+            <Button colorScheme="green" shadow="md" w="full" rounded="1em">
               Junø Pumps
             </Button>
-            <Button colorScheme="red" shadow="md" w="full">
+            <Button colorScheme="red" shadow="md" w="full" rounded="1em">
               Junø Dumps
             </Button>
           </VStack>
@@ -171,6 +214,7 @@ export const PredictionGameCard = ({
           w="14.5rem"
           h="8rem"
           justify="center"
+          _dark={{ bg: "gray.600" }}
           gap={0}
           bg="white"
           zIndex={2}
@@ -183,22 +227,14 @@ export const PredictionGameCard = ({
           px={3}
           py={1}
         >
-          <Text fontSize="13">Last Price</Text>
-          <Flex justifyContent="space-between">
-            <Heading fontSize="26">$0.00</Heading>
-            <Tag>$0.00</Tag>
-          </Flex>
-          <Flex pt={3} fontSize="13" justifyContent="space-between">
-            <Text>Locked Price:</Text>
-            <Text>$0.00</Text>
-          </Flex>
-          <Flex fontWeight="600" fontSize="16" justifyContent="space-between">
-            <Text>Prize Pool:</Text>
-            <HStack spacing={0.5}>
-              <Text>20</Text>
-              <Image w="1.5rem" src="/assets/logo_transparent.png" />
-            </HStack>
-          </Flex>
+          <Text w="full" textAlign="center" fontSize="13">
+            Game starts in:
+          </Text>
+          <CountdownTimer
+            timeTo={dayjs()
+              .add(time ?? 0, "m")
+              .unix()}
+          />
         </Flex>
       )}
       {gameStatus === "live" && (
@@ -208,6 +244,7 @@ export const PredictionGameCard = ({
           justify="center"
           gap={0}
           bg="white"
+          _dark={{ bg: "gray.600" }}
           zIndex={2}
           rounded="1em"
           shadow="md"
@@ -243,6 +280,7 @@ export const PredictionGameCard = ({
           justify="center"
           gap={0}
           bg="white"
+          _dark={{ bg: "gray.600" }}
           zIndex={2}
           rounded="1em"
           shadow="md"

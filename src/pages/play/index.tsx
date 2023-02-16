@@ -165,7 +165,7 @@ const Play = () => {
             display: "flex"
           }}
         >
-          <PredictionGameCard gameStatus={"later"} />
+          <PredictionGameCard time={5} gameStatus={"later"} />
         </SwiperSlide>
         <SwiperSlide
           style={{
@@ -173,7 +173,7 @@ const Play = () => {
             display: "flex"
           }}
         >
-          <PredictionGameCard gameStatus={"later"} />
+          <PredictionGameCard time={10} gameStatus={"later"} />
         </SwiperSlide>
       </Swiper>
       <Flex

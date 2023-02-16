@@ -18,11 +18,12 @@ export const PairPicker = () => {
         as={MenuButton}
         px={4}
         bg="white"
-        rounded="1em"
+        _dark={{ bg: "gray.700", _active: { bg: "gray.600" }, color: "white" }}
+        rounded="1.25em"
         shadow="md"
         pos={{ base: "relative", md: "absolute" }}
         left={{ base: "0", md: "6rem" }}
-        h="2.5rem"
+        h="3rem"
         w="11rem"
         justify="center"
         fontWeight="600"
@@ -47,6 +48,7 @@ export const PairPicker = () => {
         >
           <MenuItem
             _disabled={{ color: "gray.800", cursor: "auto" }}
+            _dark={{ color: "offwhite.3", cursor: "auto" }}
             isDisabled
             cursor="auto"
           >

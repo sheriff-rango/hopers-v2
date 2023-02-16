@@ -18,10 +18,11 @@ export const SwiperController = ({
       alignItems="center"
       px={0}
       bg="white"
-      rounded="1em"
+      _dark={{ bg: "gray.700" }}
+      rounded="1.25em"
       shadow="md"
       minW="16rem"
-      h="2.5rem"
+      h="3rem"
       pos="relative"
     >
       <MotionIconButton
@@ -41,6 +42,7 @@ export const SwiperController = ({
         pos="absolute"
         shadow="md"
         bg="white"
+        _dark={{ bg: "gray.600" }}
         rounded="full"
       />
       <MotionIconButton

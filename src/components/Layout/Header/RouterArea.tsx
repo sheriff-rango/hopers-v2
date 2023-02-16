@@ -98,7 +98,7 @@ export const RouterArea = () => {
         initialIndexId = 1
         setActiveRoute(data[1].subLinks)
         break
-      case "win":
+      case "play":
         initialIndexId = 2
         setActiveRoute(data[2].subLinks)
         break
