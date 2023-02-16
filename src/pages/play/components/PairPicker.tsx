@@ -20,8 +20,8 @@ export const PairPicker = () => {
         bg="white"
         rounded="1em"
         shadow="md"
-        pos="absolute"
-        left="6rem"
+        pos={{ base: "relative", md: "absolute" }}
+        left={{ base: "0", md: "6rem" }}
         h="2.5rem"
         w="11rem"
         justify="center"

@@ -6,6 +6,7 @@ import {
   IconButton,
   Image,
   Text,
+  useBreakpoint,
   VStack
 } from "@chakra-ui/react"
 import { FaQuestionCircle } from "react-icons/fa"
@@ -24,21 +25,11 @@ import { useRef, useCallback, useState, useEffect } from "react"
 import { Helmet } from "react-helmet"
 
 const Play = () => {
-  // const sliderRef = useRef<SwiperRef>(null)
-
-  // const handlePrev = useCallback(() => {
-  //   if (!sliderRef.current) return
-  //   sliderRef.current.slidePrev()
-  // }, [])
-
-  // const handleNext = useCallback(() => {
-  //   if (!sliderRef.current) return
-  //   sliderRef.current.slideNext()
-  // }, [])
-
   const [swiper, setSwiper] = useState<SwiperRef>()
   const prevRef = useRef()
   const nextRef = useRef()
+
+  const breakpoint = useBreakpoint()
 
   useEffect(() => {
     if (swiper) {
@@ -54,17 +45,23 @@ const Play = () => {
 
   return (
     <Flex
-      gap={12}
+      gap={{ base: 8, md: 12 }}
       align="center"
       w="full"
       justify="center"
       direction="column"
-      px={32}
+      px={{ base: 6, md: 32 }}
     >
       <Helmet>
         <title>Prediction | Hopers.io</title>
       </Helmet>
-      <Flex w="full" justify="center">
+      <Flex
+        w="full"
+        justify="center"
+        direction={{ base: "column", md: "row" }}
+        gap={8}
+        align="center"
+      >
         <PairPicker />
         <SwiperController nextRef={nextRef} prevRef={prevRef} />
         <GameTimer />
@@ -73,6 +70,7 @@ const Play = () => {
         style={{
           width: "100%",
           overflow: "visible",
+          // breakpoint === "sm" || breakpoint === "base" ? "hidden" : "visible",
           minHeight: "23rem",
           justifyContent: "center"
         }}
@@ -92,13 +90,17 @@ const Play = () => {
         pagination={true}
         spaceBetween={0}
         breakpoints={{
-          "@0.00": {
+          0: {
             slidesPerView: 1
           },
-          "@0.50": {
-            slidesPerView: 3
+          640: {
+            slidesPerView: 1
           },
-          "@1.50": {
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 30
+          },
+          1200: {
             slidesPerView: 5,
             spaceBetween: 30
           }
