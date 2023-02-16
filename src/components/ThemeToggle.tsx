@@ -5,18 +5,17 @@ import { RiMoonFill, RiSunFill, RiSunLine } from "react-icons/ri"
 const ThemeToggle = () => {
   const { colorMode, toggleColorMode } = useColorMode()
 
-  const bgColor = useColorModeValue("rgba(2,226,150, 0.7)", "#332D2D")
-  const hoverBgColor = useColorModeValue("green.300", "#484040")
-  const activeBgColor = useColorModeValue("green.400", "#2d2828")
+  const bgColor = useColorModeValue("rgba(2,226,150, 1)", "gray.700")
 
   return (
     <IconButton
       aria-label="theme toggle"
       variant="ghost"
       rounded="1em"
+      shadow="md"
       bg={bgColor}
-      _hover={{ bg: hoverBgColor }}
-      _active={{ bg: activeBgColor }}
+      _hover={{ filter: "brightness(110%)" }}
+      _active={{ filter: "brightness(90%)" }}
       icon={colorMode === "light" ? <BsFillMoonStarsFill /> : <RiSunFill />}
       onClick={() => {
         toggleColorMode()

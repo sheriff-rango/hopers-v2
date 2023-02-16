@@ -34,7 +34,7 @@ const Header = () => {
       px={3}
       shadow="md"
       zIndex={5}
-      bg={useColorModeValue("white", "gray.700")}
+      bg={useColorModeValue("white", "gray.800")}
     >
       <HStack pos="relative" spacing={1}>
         <Image w="3rem" src="/assets/logo_transparent.png" />

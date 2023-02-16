@@ -117,6 +117,8 @@ const NavigationButton = ({
             background:
               url === pathname ? "transparent" : "rgba(255,255,255,0.2)"
           }}
+          color={url === pathname ? "white" : "gray.800"}
+          _dark={{ color: url === pathname ? "gray.800" : "white" }}
           pos="relative"
           px={3}
           minW="4rem"
@@ -134,7 +136,6 @@ const NavigationButton = ({
               <Text
                 zIndex={2}
                 transition="0.35s all"
-                color={textColor}
                 fontSize="1.2em"
                 fontWeight="600"
                 fontFamily="heading"

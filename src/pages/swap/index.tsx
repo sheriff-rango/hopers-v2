@@ -1216,6 +1216,7 @@ const Swap = () => {
       direction="column"
       py={3}
       gap={3}
+      pos="relative"
     >
       <Helmet>
         <title>Swap | Hopers.io</title>

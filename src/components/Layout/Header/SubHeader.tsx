@@ -10,6 +10,7 @@ export const SubHeader = () => {
       {activeRoute && (
         <TabList
           bg="white"
+          _dark={{ bg: "gray.700" }}
           h="2.5rem"
           w="full"
           justifyContent="center"
@@ -22,7 +23,7 @@ export const SubHeader = () => {
               <Tab
                 color="rgba(2,226,150, 1)"
                 borderBottom="3px solid"
-                fontWeight="600"
+                fontWeight="400"
                 py={"0.35rem"}
                 fontSize="19"
               >

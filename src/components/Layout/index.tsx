@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify"
 import Header from "./Header"
 import Meta from "../Meta"
 import { SubHeader } from "./Header/SubHeader"
+import { Footer } from "./Footer"
 
 type LayoutProps = {
   children: ReactNode
@@ -29,9 +30,10 @@ const Layout = ({ children }: LayoutProps) => {
       <Flex direction="column" w="full" align="start" justify="start">
         <Header />
         <SubHeader />
-        <Flex w="full" justify="center" flex={1} as="main">
+        <Flex w="full" justify="center" as="main" minH="calc(100vh - 7rem)">
           {children}
         </Flex>
+        <Footer />
       </Flex>
 
       <ToastContainer
