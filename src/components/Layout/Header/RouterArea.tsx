@@ -51,17 +51,17 @@ export const RouterArea = () => {
     },
     {
       icon: <Icon zIndex={1} as={FarmIcon} h="full" w="1.8rem" />,
-      label: "Farm",
+      label: "Earn",
       navId: 1,
       url: "/farm"
     },
     {
       icon: <Icon zIndex={1} as={WinIcon} h="full" w="1.7rem" />,
-      label: "Win",
+      label: "Play",
       navId: 2,
-      url: "/win",
+      url: "/play",
       subLinks: {
-        Prediction: "/win"
+        Prediction: "/play"
       }
     },
     {

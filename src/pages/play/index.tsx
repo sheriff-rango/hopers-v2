@@ -21,8 +21,9 @@ import "swiper/css/pagination"
 import { EffectCoverflow, Navigation, Pagination, Virtual } from "swiper"
 import { type Swiper as SwiperRef } from "swiper"
 import { useRef, useCallback, useState, useEffect } from "react"
+import { Helmet } from "react-helmet"
 
-const Win = () => {
+const Play = () => {
   // const sliderRef = useRef<SwiperRef>(null)
 
   // const handlePrev = useCallback(() => {
@@ -60,6 +61,9 @@ const Win = () => {
       direction="column"
       px={32}
     >
+      <Helmet>
+        <title>Prediction | Hopers.io</title>
+      </Helmet>
       <Flex w="full" justify="center">
         <PairPicker />
         <SwiperController nextRef={nextRef} prevRef={prevRef} />
@@ -197,4 +201,4 @@ const Win = () => {
   )
 }
 
-export default Win
+export default Play

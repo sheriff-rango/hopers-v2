@@ -6,7 +6,8 @@ import Farm from "pages/farm"
 import Assets from "pages/assets"
 import NFT from "pages/nft"
 import IDO from "pages/ido"
-import Win from "pages/win"
+import Win from "pages/play"
+import Play from "pages/play"
 
 export const routes: Array<PathRouteProps> = [
   {
@@ -22,8 +23,8 @@ export const routes: Array<PathRouteProps> = [
     element: <Farm />
   },
   {
-    path: "/win",
-    element: <Win />
+    path: "/play",
+    element: <Play />
   },
   {
     path: "/assets",

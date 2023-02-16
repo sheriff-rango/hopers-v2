@@ -42,12 +42,16 @@ const Header = () => {
           Hopers.io
         </Heading>
         <Tag
-          px={1}
+          px={"3px"}
           py={0}
+          lineHeight={0}
           pos="absolute"
-          right={-8}
+          fontSize="10"
+          letterSpacing={1}
+          fontWeight="600"
+          right={-6}
           top="0"
-          bg="rgba(2,226,150, 0.7)"
+          bg="rgba(2,226,150, 0.5)"
         >
           BETA
         </Tag>

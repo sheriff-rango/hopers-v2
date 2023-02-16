@@ -1,9 +1,13 @@
 import { Box, Heading } from "@chakra-ui/react"
+import { Helmet } from "react-helmet"
 
 const Farm = () => {
   return (
     <Box>
-      <Heading>Farm</Heading>
+      <Helmet>
+        <title>Earn | Hopers.io</title>
+      </Helmet>
+      <Heading>Earn</Heading>
     </Box>
   )
 }

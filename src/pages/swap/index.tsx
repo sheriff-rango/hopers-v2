@@ -53,6 +53,7 @@ import { SwapIcon } from "components/Assets/SwapIcon"
 import { MotionFlex } from "components/MenuToggle"
 import { AnimatePresence, motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
+import { Helmet } from "react-helmet"
 import { BsExclamationCircleFill } from "react-icons/bs"
 import { FiChevronUp, FiChevronDown } from "react-icons/fi"
 import { RiSettings4Fill, RiSearch2Fill } from "react-icons/ri"
@@ -137,6 +138,7 @@ const Setting = () => {
           bg={useColorModeValue("white", "whiteAlpha.400")}
           aria-label="Open Swap Settings"
           size="sm"
+          shadow="md"
           rounded="0.7rem"
           icon={<Icon as={RiSettings4Fill} />}
           color={
@@ -278,6 +280,7 @@ const FromToken = ({
   ])
   const fromMenuRef = useRef<HTMLDivElement | null>(null)
   const { isOpen, onToggle, onClose } = useDisclosure()
+
   const customStyles = {
     control: (provided: SystemStyleObject) => ({
       ...provided,
@@ -344,6 +347,7 @@ const FromToken = ({
       color: "inherit"
     })
   }
+
   const IndicatorSeparator = () => {
     return null
   }
@@ -486,8 +490,7 @@ const FromToken = ({
       shadow="md"
       as={motion.div}
       variants={fadeIn}
-      borderRadius="3xl"
-      zIndex={2}
+      borderRadius="1em"
       p={3}
       w="full"
     >
@@ -507,7 +510,7 @@ const FromToken = ({
           justify="space-between"
           align="center"
         >
-          <Text fontSize={"md"} fontWeight="bold">
+          <Text fontSize={"md"} fontWeight="normal">
             Available
           </Text>
           <Text fontSize={"md"} fontWeight="bold" color="primary.300">
@@ -632,63 +635,60 @@ const FromToken = ({
             </Flex>
           )}
         </Flex>
-
-        <MenuList
-          as={Box}
-          position="relative"
-          zIndex={2_000}
-          backgroundBlendMode={"soft-light"}
-          backdropFilter="blur(20px) saturate(140%)"
-          bg="rgba(255,255,255,0.05)"
-          boxShadow={
-            isOpen ? "0 12px 20px -8px rgba(105, 88, 164, 0.5)" : "none"
-          }
-          borderRadius="2xl"
-          left={0}
-          right={0}
-          px={6}
-        >
-          <Box py={6}>
-            {fromItem ? (
-              <AsyncSelect
-                placeholder="Search"
-                chakraStyles={customStyles}
-                isClearable={false}
-                // isOptionDisabled={(option) => option.label === 'Ion'} // test option disabled
-                blurInputOnSelect={true}
-                controlShouldRenderValue={false}
-                menuIsOpen={true}
-                loadingMessage={() => <SkeletonOptions />}
-                defaultOptions={data}
-                value={fromItem}
-                loadOptions={(inputValue, callback) => {
-                  setTimeout(() => {
-                    const values = data.filter((option) =>
-                      option.label
-                        .toLowerCase()
-                        .includes(inputValue.toLowerCase())
-                    )
-                    callback(values)
-                  }, 1_000)
-                }}
-                onChange={(selectedOption) => {
-                  let value = {}
-                  value = { ...selectedOption }
-                  setFromItem(value as DataType)
-                  onClose()
-                }}
-                components={{
-                  Control: CustomControl,
-                  DropdownIndicator,
-                  IndicatorSeparator,
-                  Option: CustomOption
-                }}
-              />
-            ) : (
-              <SkeletonOptions />
-            )}
-          </Box>
-        </MenuList>
+        <Portal>
+          <MenuList
+            as={Box}
+            position="relative"
+            bg="rgba(255,255,255,1)"
+            shadow="md"
+            rounded="1em"
+            border="none"
+            left={0}
+            right={0}
+            px={6}
+          >
+            <Box py={6}>
+              {fromItem ? (
+                <AsyncSelect
+                  placeholder="Search"
+                  chakraStyles={customStyles}
+                  isClearable={false}
+                  // isOptionDisabled={(option) => option.label === 'Ion'} // test option disabled
+                  blurInputOnSelect={true}
+                  controlShouldRenderValue={false}
+                  menuIsOpen={true}
+                  loadingMessage={() => <SkeletonOptions />}
+                  defaultOptions={data}
+                  value={fromItem}
+                  loadOptions={(inputValue, callback) => {
+                    setTimeout(() => {
+                      const values = data.filter((option) =>
+                        option.label
+                          .toLowerCase()
+                          .includes(inputValue.toLowerCase())
+                      )
+                      callback(values)
+                    }, 1_000)
+                  }}
+                  onChange={(selectedOption) => {
+                    let value = {}
+                    value = { ...selectedOption }
+                    setFromItem(value as DataType)
+                    onClose()
+                  }}
+                  components={{
+                    Control: CustomControl,
+                    DropdownIndicator,
+                    IndicatorSeparator,
+                    Option: CustomOption
+                  }}
+                />
+              ) : (
+                <SkeletonOptions />
+              )}
+            </Box>
+          </MenuList>
+        </Portal>
       </Menu>
     </Box>
   )
@@ -858,8 +858,7 @@ const ToToken = ({
       bg={bgColor}
       as={motion.div}
       variants={fadeIn}
-      borderRadius="3xl"
-      zIndex={2}
+      borderRadius="1em"
       p={3}
       w="full"
     >
@@ -919,7 +918,6 @@ const ToToken = ({
             <MenuList
               as={Box}
               position="relative"
-              zIndex={2_000}
               borderRadius="2xl"
               left={0}
               right={0}
@@ -1219,6 +1217,9 @@ const Swap = () => {
       py={3}
       gap={3}
     >
+      <Helmet>
+        <title>Swap | Hopers.io</title>
+      </Helmet>
       <MotionFlex
         pos="absolute"
         bottom="0.25rem"
@@ -1230,7 +1231,7 @@ const Swap = () => {
         target="_blank"
       >
         <Tag
-          zIndex="2"
+          zIndex={2}
           fontSize="md"
           rounded="1em"
           bg="offwhite.1"
@@ -1323,6 +1324,7 @@ const Swap = () => {
             layout
             gap={3}
             w="50%"
+            maxW="xl"
             px={{ base: 4, sm: 4 }}
             transition={{ type: "spring", bounce: 0 }}
           >
@@ -1348,7 +1350,7 @@ const Swap = () => {
                   position: "absolute",
                   top: "52%",
                   width: "3rem",
-                  zIndex: 5
+                  zIndex: 2
                 }}
                 shadow="md"
                 overflow="hidden"
@@ -1375,10 +1377,11 @@ const Swap = () => {
             )}
 
             <Button
-              h={{ base: 12, md: 16 }}
+              h={{ base: 12, md: "3rem" }}
+              shadow="md"
               w="full"
               rounded="3xl"
-              colorScheme="catred"
+              colorScheme="green"
             >
               Swap
             </Button>

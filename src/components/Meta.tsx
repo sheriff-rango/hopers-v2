@@ -1,12 +1,15 @@
 import { Helmet } from "react-helmet"
 
-const APP_NAME = "Junø Apes - Web"
+const APP_NAME = "Hopers"
 
 const Meta = () => {
   return (
     <Helmet>
-      <title>Junø Apes</title>
-      <meta name="description" content="Junø Apes" />
+      <title>Hopers | DeFi & NFTs</title>
+      <meta
+        name="description"
+        content="Hopers.io, an avenue for the evolution of DeFi & NFTs on Juno"
+      />
 
       <meta name="application-name" content={APP_NAME} />
       <meta name="apple-mobile-web-app-capable" content="yes" />

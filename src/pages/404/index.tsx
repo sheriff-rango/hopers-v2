@@ -19,11 +19,12 @@ const Page404 = () => {
 
   return (
     <Center flexDirection="column" textAlign="center">
-      <Heading fontSize="5em">Page not Found</Heading>
-      <VStack gap={4}>
-        <Text fontSize="2xl">Don't be sad young ape, head right back!</Text>
+      <Heading fontSize="5em">Page Not Found</Heading>
+      <VStack gap={3} pt={2}>
+        <Text fontSize="2xl">There's nothing here. Want to go back?</Text>
         <Button
-          rounded="0.9em"
+          rounded="1em"
+          shadow="md"
           bg="white"
           _hover={{ bg: "gray.100" }}
           fontSize="1.3em"
