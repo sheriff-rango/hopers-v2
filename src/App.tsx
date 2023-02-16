@@ -17,66 +17,70 @@ import RouterSetup from "components/Router/RouterSetup"
 import { theme } from "theme"
 import { ChainProvider } from "@cosmos-kit/react"
 import { getModal } from "components/WalletModal"
+import { RecoilRoot } from "recoil"
+import { QueryClientProvider } from "@tanstack/react-query"
+import { queryClient } from "services/queryClient"
 
 import "react-toastify/dist/ReactToastify.css"
-import { RecoilRoot } from "recoil"
 
 const App = () => {
   return (
     <ChakraProvider resetCSS theme={theme}>
       <RecoilRoot>
-        <ChainProvider
-          chains={chains}
-          assetLists={assets}
-          modalTheme={theme}
-          key="chainProvider"
-          sessionOptions={{ killOnTabClose: false }}
-          walletModal={getModal("simple_v2")}
-          wallets={[
-            ...wcv2Wallets,
-            ...keplrWallets,
-            ...cosmostationWallets,
-            ...leapWallets,
-            ...vectisWallets
-          ]}
-          defaultNameService="stargaze"
-          wcSignClientOptions={{
-            projectId: import.meta.env.VITE_WCCLIENT,
-            relayUrl: "wss://relay.walletconnect.org",
-            name: "Junø Apes - Web App",
-            metadata: {
-              description: "Junø Apes - Web App at https://japes.club",
-              icons: ["/assets/logo_transparent.png"],
-              url: "https://japes.club",
-              name: "Junø Apes - Web App"
-            }
-          }}
-          signerOptions={{
-            signingStargate: (chain: Chain) => {
-              switch (chain.chain_name) {
-                case "juno":
-                  return {
-                    gasPrice: new GasPrice(
-                      Decimal.fromUserInput("25000", 2),
-                      "ujuno"
-                    )
-                  }
-                default:
-                  return undefined
+        <QueryClientProvider client={queryClient}>
+          <ChainProvider
+            chains={chains}
+            assetLists={assets}
+            modalTheme={theme}
+            key="chainProvider"
+            sessionOptions={{ killOnTabClose: false }}
+            walletModal={getModal("simple_v2")}
+            wallets={[
+              ...wcv2Wallets,
+              ...keplrWallets,
+              ...cosmostationWallets,
+              ...leapWallets,
+              ...vectisWallets
+            ]}
+            defaultNameService="stargaze"
+            wcSignClientOptions={{
+              projectId: import.meta.env.VITE_WCCLIENT,
+              relayUrl: "wss://relay.walletconnect.org",
+              name: "Junø Apes - Web App",
+              metadata: {
+                description: "Junø Apes - Web App at https://japes.club",
+                icons: ["/assets/logo_transparent.png"],
+                url: "https://japes.club",
+                name: "Junø Apes - Web App"
               }
-            }
-          }}
-        >
-          <Router>
-            <MotionConfig
-              transition={{ type: "spring", bounce: 0.4, damping: 7 }}
-            >
-              <Layout>
-                <RouterSetup />
-              </Layout>
-            </MotionConfig>
-          </Router>
-        </ChainProvider>
+            }}
+            signerOptions={{
+              signingStargate: (chain: Chain) => {
+                switch (chain.chain_name) {
+                  case "juno":
+                    return {
+                      gasPrice: new GasPrice(
+                        Decimal.fromUserInput("25000", 2),
+                        "ujuno"
+                      )
+                    }
+                  default:
+                    return undefined
+                }
+              }
+            }}
+          >
+            <Router>
+              <MotionConfig
+                transition={{ type: "spring", bounce: 0.4, damping: 7 }}
+              >
+                <Layout>
+                  <RouterSetup />
+                </Layout>
+              </MotionConfig>
+            </Router>
+          </ChainProvider>
+        </QueryClientProvider>
       </RecoilRoot>
     </ChakraProvider>
   )

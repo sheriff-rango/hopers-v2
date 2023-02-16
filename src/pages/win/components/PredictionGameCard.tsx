@@ -10,8 +10,10 @@ import {
   VStack,
   Button
 } from "@chakra-ui/react"
-import { useMemo } from "react"
+import { MotionFlex } from "components/MenuToggle"
+import { useEffect, useMemo } from "react"
 import { FaBan, FaClock, FaPlayCircle } from "react-icons/fa"
+import { getTokenPriceCoinGecko } from "utils/prices/getTokenPrice"
 
 export const PredictionGameCard = ({
   gameStatus
@@ -35,8 +37,14 @@ export const PredictionGameCard = ({
     }
   }, [gameStatus])
 
+  useEffect(() => {
+    console.log(
+      getTokenPriceCoinGecko({ tokenId: "juno-network", precision: 6 })
+    )
+  })
+
   return (
-    <Flex
+    <MotionFlex
       h="20rem"
       w="16rem"
       rounded="1em"
@@ -44,6 +52,8 @@ export const PredictionGameCard = ({
       shadow="md"
       overflow="hidden"
       pos="relative"
+      whileHover={{ opacity: 1 }}
+      opacity={gameStatus === "expired" ? 0.6 : 1}
     >
       <Flex
         px={2}
@@ -122,7 +132,7 @@ export const PredictionGameCard = ({
           UP
         </Heading>
       </VStack>
-      {gameStatus === "next" ? (
+      {gameStatus === "next" && (
         <Flex
           w="14.5rem"
           h="9rem"
@@ -155,7 +165,8 @@ export const PredictionGameCard = ({
             </Button>
           </VStack>
         </Flex>
-      ) : (
+      )}
+      {gameStatus === "later" && (
         <Flex
           w="14.5rem"
           h="8rem"
@@ -190,6 +201,76 @@ export const PredictionGameCard = ({
           </Flex>
         </Flex>
       )}
+      {gameStatus === "live" && (
+        <Flex
+          w="14.5rem"
+          h="8rem"
+          justify="center"
+          gap={0}
+          bg="white"
+          zIndex={2}
+          rounded="1em"
+          shadow="md"
+          top="calc(50% - 3rem)"
+          left="calc(50% - 7.25rem)"
+          pos="absolute"
+          flexDirection="column"
+          px={3}
+          py={1}
+        >
+          <Text fontSize="13">Last Price</Text>
+          <Flex justifyContent="space-between">
+            <Heading fontSize="26">$0.00</Heading>
+            <Tag>$0.00</Tag>
+          </Flex>
+          <Flex pt={3} fontSize="13" justifyContent="space-between">
+            <Text>Locked Price:</Text>
+            <Text>$0.00</Text>
+          </Flex>
+          <Flex fontWeight="600" fontSize="16" justifyContent="space-between">
+            <Text>Prize Pool:</Text>
+            <HStack spacing={0.5}>
+              <Text>20</Text>
+              <Image w="1.5rem" src="/assets/logo_transparent.png" />
+            </HStack>
+          </Flex>
+        </Flex>
+      )}
+      {gameStatus === "expired" && (
+        <Flex
+          w="14.5rem"
+          h="8rem"
+          justify="center"
+          gap={0}
+          bg="white"
+          zIndex={2}
+          rounded="1em"
+          shadow="md"
+          top="calc(50% - 3rem)"
+          left="calc(50% - 7.25rem)"
+          pos="absolute"
+          flexDirection="column"
+          px={3}
+          py={1}
+        >
+          <Text fontSize="13">Closed Price</Text>
+          <Flex justifyContent="space-between">
+            <Heading fontSize="26">$0.00</Heading>
+            <Tag>$0.00</Tag>
+          </Flex>
+          <Flex pt={3} fontSize="13" justifyContent="space-between">
+            <Text>Locked Price:</Text>
+            <Text>$0.00</Text>
+          </Flex>
+          <Flex fontWeight="600" fontSize="16" justifyContent="space-between">
+            <Text>Prize Pool:</Text>
+            <HStack spacing={0.5}>
+              <Text>20</Text>
+              <Image w="1.5rem" src="/assets/logo_transparent.png" />
+            </HStack>
+          </Flex>
+        </Flex>
+      )}
       <VStack
         bottom="2rem"
         left="calc(50% - 7.25rem)"
@@ -201,6 +282,6 @@ export const PredictionGameCard = ({
           DOWN
         </Heading>
       </VStack>
-    </Flex>
+    </MotionFlex>
   )
 }

@@ -41,6 +41,7 @@
     "@fontsource/sigmar-one": "^4.5.9",
     "@nivo/core": "^0.80.0",
     "@nivo/line": "^0.80.0",
+    "@tanstack/react-query": "^4.24.6",
     "ahooks": "^3.7.4",
     "chain-registry": "^1.6.0",
     "chakra-react-select": "^4.4.3",

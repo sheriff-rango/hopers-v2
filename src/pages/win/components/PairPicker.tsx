@@ -23,7 +23,7 @@ export const PairPicker = () => {
         pos="absolute"
         left="6rem"
         h="2.5rem"
-        w="10rem"
+        w="11rem"
         justify="center"
         fontWeight="600"
         variant="unstyled"
