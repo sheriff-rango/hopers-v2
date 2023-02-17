@@ -10,7 +10,6 @@ import {
   VStack,
   Button
 } from "@chakra-ui/react"
-import { MotionFlex } from "components/MenuToggle"
 import { useEffect, useMemo } from "react"
 import { FaBan, FaClock, FaPlayCircle } from "react-icons/fa"
 import { getTokenPriceCoinGecko } from "utils/prices/getTokenPrice"
@@ -18,6 +17,7 @@ import { CountdownTimer } from "./CountdownTimer"
 
 import dayjs from "dayjs"
 import duration from "dayjs/plugin/duration"
+import MotionFlex from "theme/motion/components/MotionFlex"
 
 dayjs.extend(duration)
 

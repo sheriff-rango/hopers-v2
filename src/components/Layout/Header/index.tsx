@@ -2,7 +2,6 @@ import {
   Flex,
   Heading,
   HStack,
-  Icon,
   Image,
   Spacer,
   Tag,
@@ -10,10 +9,6 @@ import {
   useColorModeValue
 } from "@chakra-ui/react"
 import ConnectButton from "components/ConnectButton"
-import SocialMediaButton from "components/SocialMediaButton"
-import { FaTelegramPlane, FaTwitter } from "react-icons/fa"
-
-import MenuToggle from "../../MenuToggle"
 import ThemeToggle from "../../ThemeToggle"
 import { HeaderMenu } from "./HeaderMenu"
 import { RouterArea } from "./RouterArea"

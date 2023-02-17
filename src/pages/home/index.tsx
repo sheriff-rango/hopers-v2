@@ -1,9 +1,7 @@
-import { Grid } from "@chakra-ui/react"
-
-import SomeText from "./components/SomeText"
+import { Heading } from "@chakra-ui/react"
 
 const Home = () => {
-  return <SomeText />
+  return <Heading>Homepage</Heading>
 }
 
 export default Home

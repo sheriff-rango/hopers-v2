@@ -1,7 +1,5 @@
-import { Box, Center, Flex, IconButton } from "@chakra-ui/react"
+import { Flex } from "@chakra-ui/react"
 import { PredictionCardsIcon } from "components/Assets/PredictionCardsIcon"
-import { MotionFlex } from "components/MenuToggle"
-import { MutableRefObject } from "react"
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa"
 import MotionIconButton from "theme/motion/components/MotionIconButton"
 

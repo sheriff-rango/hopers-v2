@@ -50,7 +50,6 @@ import {
   chakraComponents
 } from "chakra-react-select"
 import { SwapIcon } from "components/Assets/SwapIcon"
-import { MotionFlex } from "components/MenuToggle"
 import { AnimatePresence, motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
 import { Helmet } from "react-helmet"
@@ -59,6 +58,7 @@ import { FiChevronUp, FiChevronDown } from "react-icons/fi"
 import { RiSettings4Fill, RiSearch2Fill } from "react-icons/ri"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { marketAdvancedModeState, showUIState } from "state/UIState"
+import MotionFlex from "theme/motion/components/MotionFlex"
 import fadeIn from "theme/motion/variants/general/fadeIn"
 import { SwapChart } from "./components/Chart"
 import { CustomSwitch } from "./components/CustomSwitch"
@@ -1223,12 +1223,13 @@ const Swap = () => {
       </Helmet>
       <MotionFlex
         pos="absolute"
-        bottom="0.25rem"
-        right="1rem"
+        bottom="1.5rem"
+        right="1.5rem"
         whileHover={{ scale: 1.1 }}
         _hover={{ cursor: "pointer", textDecoration: "none" }}
         as={Link}
-        href="https://docs.hopers.io"
+        // @ts-ignore
+        href="https://hopers-io.gitbook.io/documents/"
         target="_blank"
       >
         <Tag
@@ -1236,12 +1237,14 @@ const Swap = () => {
           fontSize="md"
           rounded="1em"
           bg="offwhite.1"
+          _dark={{ bg: "gray.700", color: "white" }}
           h="2rem"
           pos="relative"
         >
           Need Help?
           <Box
             borderTop="5vh solid #f5f5f5"
+            _dark={{ borderTop: "5vh solid", borderTopColor: "gray.700" }}
             w="0"
             h="0"
             border="auto"
@@ -1255,7 +1258,7 @@ const Swap = () => {
         </Tag>
         <Image
           pos="relative"
-          w="12rem"
+          w={advancedMode ? "8rem" : "12rem"}
           transform="scaleX(-1)"
           src="assets/character_004.png"
         />
@@ -1265,10 +1268,13 @@ const Swap = () => {
         <MotionFlex
           as={motion.div}
           layout
-          align="start"
+          alignItems="start"
           justifyContent="center"
           w="full"
-          px={64}
+          gap={4}
+          px={4}
+          flexDirection={{ base: "column", md: "row" }}
+          maxW={{ base: "md", md: advancedMode ? "6xl" : "2xl" }}
           transition={{ type: "spring", bounce: 0 }}
         >
           {advancedMode && (
@@ -1284,7 +1290,7 @@ const Swap = () => {
               bg={bgColor}
               shadow="xl"
               rounded="3xl"
-              direction="column"
+              flexDirection="column"
             >
               <HStack px={3} pt={2}>
                 <AvatarGroup spacing={-3} size="md" max={2}>
@@ -1326,7 +1332,7 @@ const Swap = () => {
             gap={3}
             w="50%"
             maxW="xl"
-            px={{ base: 4, sm: 4 }}
+            px={0}
             transition={{ type: "spring", bounce: 0 }}
           >
             <Flex as={motion.div} alignSelf="end">
