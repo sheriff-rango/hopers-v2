@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, Button, Center, Icon, Skeleton, Text } from "@chakra-ui/react"
-import { ChainWalletBase, ModalVersion } from "@cosmos-kit/core"
+import { ChainWalletBase } from "@cosmos-kit/core"
 import { IconType } from "react-icons"
 import { BiLogOut } from "react-icons/bi"
 import { GoDesktopDownload } from "react-icons/go"
@@ -22,7 +22,6 @@ import {
 import { DisplayType, ModalInfo } from "../types"
 
 export const getSingleWalletView = (
-  version: ModalVersion,
   current: ChainWalletBase | undefined,
   qrCodeWallet: ChainWalletBase | undefined,
   setOpen: (isOpen: boolean) => void,
@@ -33,20 +32,11 @@ export const getSingleWalletView = (
     InstallWalletButton: (props: DownloadWalletButtonType) => JSX.Element,
     QRCode: (props: { link: string; description?: string }) => JSX.Element,
     ModalHead: (props: SimpleModalHeadType) => JSX.Element
-  switch (version) {
-    case "simple_v1":
-      ModalContent = SimpleDisplayModalContent
-      InstallWalletButton = SimpleInstallWalletButton
-      QRCode = SimpleQRCode
-      ModalHead = SimpleModalHead
-      break
-    case "simple_v2":
-      ModalContent = SimpleDisplayModalContent
-      InstallWalletButton = SimpleInstallWalletButton
-      QRCode = SimpleQRCode
-      ModalHead = SimpleModalHead
-      break
-  }
+
+  ModalContent = SimpleDisplayModalContent
+  InstallWalletButton = SimpleInstallWalletButton
+  QRCode = SimpleQRCode
+  ModalHead = SimpleModalHead
 
   if (qrCodeWallet && qrCodeWallet.walletStatus === "Disconnected") {
     const displayName =

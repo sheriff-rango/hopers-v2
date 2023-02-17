@@ -8,6 +8,7 @@ import { GasPrice } from "@cosmjs/stargate"
 import { wallets as cosmostationWallets } from "@cosmos-kit/cosmostation"
 import { wallets as keplrWallets } from "@cosmos-kit/keplr"
 import { wallets as leapWallets } from "@cosmos-kit/leap"
+import { wallets as trustWallets } from "@cosmos-kit/trust"
 import type { Chain } from "@chain-registry/types"
 import { assets, chains } from "chain-registry"
 import { MotionConfig } from "framer-motion"
@@ -34,24 +35,26 @@ const App = () => {
             modalTheme={theme}
             key="chainProvider"
             sessionOptions={{ killOnTabClose: false }}
-            walletModal={getModal("simple_v2")}
+            walletModal={getModal()}
+            // @ts-ignore
             wallets={[
               ...wcv2Wallets,
               ...keplrWallets,
               ...cosmostationWallets,
               ...leapWallets,
               ...vectisWallets
+              // ...trustWallets
             ]}
             defaultNameService="stargaze"
             wcSignClientOptions={{
               projectId: import.meta.env.VITE_WCCLIENT,
               relayUrl: "wss://relay.walletconnect.org",
-              name: "Junø Apes - Web App",
+              name: "Hopers.io | DeFi & NFTs",
               metadata: {
-                description: "Junø Apes - Web App at https://japes.club",
+                description: "Hopers.io | DeFi & NFTs",
                 icons: ["/assets/logo_transparent.png"],
-                url: "https://japes.club",
-                name: "Junø Apes - Web App"
+                url: "https://hopers.io",
+                name: "Hopers.io | DeFi & NFTs"
               }
             }}
             signerOptions={{

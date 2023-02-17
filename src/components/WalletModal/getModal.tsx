@@ -1,9 +1,5 @@
 import { useColorMode } from "@chakra-ui/react"
-import {
-  ChainWalletBase,
-  ModalVersion,
-  WalletModalProps
-} from "@cosmos-kit/core"
+import { ChainWalletBase, WalletModalProps } from "@cosmos-kit/core"
 import { useMemo, useRef } from "react"
 import { ReactNode, useEffect, useState } from "react"
 
@@ -11,8 +7,8 @@ import { SimpleConnectModal as ConnectModal } from "./components/SimpleConnectMo
 import { DisplayType } from "./types"
 import { getSingleWalletView, getWalletListView } from "./utils"
 
-export const getModal = (version: ModalVersion) => {
-  return ({ isOpen, setOpen, walletRepo, theme }: WalletModalProps) => {
+export const getModal = () => {
+  return ({ isOpen, setOpen, walletRepo }: WalletModalProps) => {
     const initialFocus = useRef()
     const [display, setDisplay] = useState<DisplayType>("list")
     const [qrCodeWallet, setQRCodeWallet] = useState<
@@ -41,7 +37,6 @@ export const getModal = (version: ModalVersion) => {
     const [singleViewHead, singleViewContent] = useMemo(
       () =>
         getSingleWalletView(
-          version,
           current,
           qrCodeWallet,
           setOpen,
@@ -54,7 +49,6 @@ export const getModal = (version: ModalVersion) => {
     const [listViewHead, listViewContent] = useMemo(
       () =>
         getWalletListView(
-          version,
           current,
           wallets,
           setOpen,

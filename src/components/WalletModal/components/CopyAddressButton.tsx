@@ -55,9 +55,7 @@ export function stringTruncateFromCenter(str: string, maxLength: number) {
 
 export const CopyAddressButton = ({
   address,
-  walletIcon,
   isLoading,
-  isRound,
   size = "md",
   maxDisplayLength
 }: CopyAddressType) => {
@@ -119,7 +117,13 @@ export const CopyAddressButton = ({
       }}
       onClick={onCopy}
     >
-      <Text fontWeight="200" fontSize="1em" opacity={1} color="white">
+      <Text
+        fontWeight="600"
+        fontSize="1em"
+        opacity={1}
+        color="gray.600"
+        _dark={{ color: "rgba(2, 226, 150, 1)" }}
+      >
         {displayAddress}
       </Text>
       {address && (
@@ -129,6 +133,7 @@ export const CopyAddressButton = ({
           whileTap={{ scale: 0.9 }}
           rounded="full"
           bg="white"
+          _dark={{ bg: "gray.500" }}
           boxSize="1.5rem"
         >
           <Icon
@@ -138,8 +143,8 @@ export const CopyAddressButton = ({
             opacity={0.9}
             color={
               hasCopied
-                ? "green.400"
-                : handleChangeColorModeValue(colorMode, "gray.500", "black")
+                ? "rgba(2, 226, 150, 1)"
+                : handleChangeColorModeValue(colorMode, "gray.500", "white")
             }
           />
         </Center>

@@ -54,11 +54,16 @@ export const SimpleInstallWalletButton = ({
       whileTap={{ scale: 0.95 }}
       fontWeight="200"
       fontSize="md"
-      color="white"
-      bg={handleChangeColorModeValue(colorMode, "orange.300", "green.700")}
+      color={handleChangeColorModeValue(colorMode, "gray.800", "white")}
+      shadow="md"
+      bg={handleChangeColorModeValue(
+        colorMode,
+        "rgba(2,226,150, 1)",
+        "gray.800"
+      )}
       rounded="0.9em"
       _hover={{
-        bg: handleChangeColorModeValue(colorMode, "orange.400", "green.600")
+        filter: "brightness(110%)"
       }}
       _active={{ opacity: 0.9 }}
       _focus={{ outline: "none" }}
@@ -108,31 +113,6 @@ export const SimpleDisplayModalContent = ({
       color: handleChangeColorModeValue(colorMode, "inherit", "inherit")
     }
   }
-
-  const descRef = useRef(null)
-  const [displayBlur, setDisplayBlur] = useState(false)
-
-  useEffect(() => {
-    if (descRef.current) {
-      // @ts-ignore
-      if (descRef.current.clientHeight >= 96) setDisplayBlur(true)
-      const scrollHandler = () => {
-        const height = Math.abs(
-          // @ts-ignore
-          descRef.current.scrollHeight -
-            // @ts-ignore
-            descRef.current.clientHeight -
-            // @ts-ignore
-            descRef.current.scrollTop
-        )
-        if (height < 1) setDisplayBlur(false)
-        if (height >= 1) setDisplayBlur(true)
-      }
-
-      // @ts-ignore
-      descRef.current.addEventListener("scroll", scrollHandler)
-    }
-  }, [descRef])
 
   return (
     <AnimateBox
@@ -217,7 +197,6 @@ export const SimpleDisplayModalContent = ({
         {contentDesc && (
           <Box position="relative">
             <Box
-              ref={descRef}
               w="full"
               h={"6rem"}
               overflowY="scroll"
@@ -241,55 +220,24 @@ export const SimpleDisplayModalContent = ({
                 {contentDesc}
               </Text>
             </Box>
-            <AnimateBox
-              initial={false}
-              animate={
-                displayBlur
-                  ? {
-                      opacity: 1,
-                      height: 36,
-                      transition: {
-                        type: "spring",
-                        duration: 0.1
-                      }
-                    }
-                  : {
-                      height: 0,
-                      opacity: 0,
-                      transition: {
-                        type: "spring",
-                        duration: 0.2
-                      }
-                    }
-              }
-              position="absolute"
-              bottom={0}
-              bg={handleChangeColorModeValue(colorMode, "#fff", "gray.700")}
-              style={{ marginTop: 0 }}
-              w="full"
-              background={handleChangeColorModeValue(
-                colorMode,
-                "linear-gradient(0deg, rgba(255,255,255,1) 6%, rgba(255,255,255,0.95) 16%, rgba(255,255,255,0.85) 24%, rgba(255,255,255,0.75) 32%, rgba(255,255,255,0.65) 48%, rgba(255,255,255,0.4) 65%, rgba(255,255,255,0.2) 80%, rgba(255,255,255,0.1) 95%)",
-                "linear-gradient(0deg, rgba(51, 45, 45,1) 6%, rgba(51, 45, 45,0.95) 16%, rgba(51, 45, 45,0.85) 36%, rgba(51, 45, 45,0.75) 45%, rgba(51, 45, 45,0.65) 55%, rgba(51, 45, 45,0.4) 70%, rgba(51, 45, 45,0.2) 80%, rgba(51, 45, 45,0.1) 95%)"
-              )}
-            ></AnimateBox>
           </Box>
         )}
         {username && (
           <HStack
-            bg={useColorModeValue("orange.300", "whiteAlpha.500")}
+            bg={useColorModeValue("rgba(2,226,150, 1)", "gray.800")}
             px={3}
             py={1}
             gap={3}
-            rounded="0.9em"
+            shadow="md"
+            rounded="1em"
           >
             <Stack isInline={true} justifyContent="center" alignItems="center">
               <Center w={6} h={6} minW={4} minH={4} maxW={6} maxH={6}>
                 <Image src={walletIcon} />
               </Center>
               <Text
-                fontSize="2xl"
-                fontWeight="300"
+                fontSize="1.4em"
+                fontWeight="600"
                 fontFamily="heading"
                 color={useColorModeValue("gray.800", "white")}
               >
@@ -305,6 +253,7 @@ export const SimpleDisplayModalContent = ({
           <Flex w="full" gap={2} justify="center">
             {bottomButton}
             <IconButton
+              shadow="md"
               as={motion.button}
               aria-label="Confirm Wallet Selection"
               rounded="0.9em"
@@ -336,7 +285,6 @@ export const SimpleQRCode = ({
   description?: string
 }) => {
   const elementRef = useRef(null)
-  const dimensions = useDimensions(elementRef)
   const { colorMode } = useColorMode()
   return (
     <AnimateBox
@@ -375,7 +323,7 @@ export const SimpleQRCode = ({
             logoWidth={100}
             size={350}
             bgColor={"#ffffff"}
-            fgColor={"#f0827d"}
+            fgColor={"rgba(2,226,150, 1)"}
             ecLevel={"L"}
           />
         </Center>
@@ -390,23 +338,6 @@ export const SimpleDisplayWalletList = ({
 }: DisplayWalletListType) => {
   const { colorMode } = useColorMode()
   const listRef = useRef(null)
-  const [displayBlur, setDisplayBlur] = useState(false)
-
-  useEffect(() => {
-    const current = listRef.current as any
-    if (listRef && current) {
-      if ((current as any).clientHeight >= 311) setDisplayBlur(true)
-      const scrollHandler = () => {
-        const height = Math.abs(
-          current?.scrollHeight - current?.clientHeight - current?.scrollTop
-        )
-        if (height < 1) setDisplayBlur(false)
-        if (height >= 1) setDisplayBlur(true)
-      }
-
-      current.addEventListener("scroll", scrollHandler)
-    }
-  }, [listRef])
 
   return (
     <AnimateBox
@@ -417,7 +348,7 @@ export const SimpleDisplayWalletList = ({
       <Grid
         ref={listRef}
         position="relative"
-        templateColumns={{ base: "1fr", md: "1fr 1fr" }}
+        templateColumns={{ base: "1fr", md: "1fr 1fr 1fr" }}
         templateRows={{ base: "max-content", md: "auto" }}
         columnGap={2.5}
         rowGap={2}
@@ -426,20 +357,28 @@ export const SimpleDisplayWalletList = ({
         overflowY="scroll"
         paddingInline={0}
         px={6}
+        py={3}
         css={{
           // for firefox
           scrollbarWidth: "none",
           // for chrome
           "::-webkit-scrollbar": {
             display: "none"
-          }
+          },
+          maskImage: `linear-gradient(
+            to bottom,
+            transparent,
+            black 1rem,
+            black calc(100% - 1rem),
+            transparent
+          )`
         }}
       >
         {walletsData.map(({ name, prettyName, logo, onClick }, i) => {
           return (
             <GridItem
               key={i}
-              colSpan={{ base: 2, md: i > 1 ? 2 : "auto" }}
+              colSpan={{ base: 2, md: i > 2 ? 3 : "auto" }}
               w="full"
             >
               <Button
@@ -450,63 +389,51 @@ export const SimpleDisplayWalletList = ({
                 display="flex"
                 w="full"
                 h="fit-content"
-                p={{ base: 2, md: i > 1 ? 2 : 3 }}
-                py={{ md: i > 1 ? 2 : 7 }}
-                mb={{ base: 0, md: i > 1 ? 0 : 1.5 }}
+                p={{ base: 2, md: i > 2 ? 2 : 3 }}
+                py={{ md: i > 2 ? 2 : 7 }}
+                mb={{ base: 0, md: i > 2 ? 0 : 1.5 }}
                 justifyContent="start"
                 borderRadius="0.9em"
                 whiteSpace="break-spaces"
-                color={handleChangeColorModeValue(
-                  colorMode,
-                  "blackAlpha.800",
-                  "whiteAlpha.800"
-                )}
                 transition="all .15s ease-in-out"
                 bg={handleChangeColorModeValue(
                   colorMode,
-                  "orange.300",
-                  "green.700"
+                  "rgb(2,226,150)",
+                  "rgb(0, 163, 109)"
                 )}
                 _hover={{
-                  bg: handleChangeColorModeValue(
-                    colorMode,
-                    "orange.400",
-                    "green.600"
-                  )
+                  filter: "brightness(110%)"
                 }}
                 _focus={{
-                  bg: handleChangeColorModeValue(
-                    colorMode,
-                    "orange.500",
-                    "green.800"
-                  )
+                  filter: "brightness(90%)"
                 }}
                 onClick={onClick}
               >
                 <Flex
                   w="full"
-                  flexDirection={{ base: "row", md: i > 1 ? "row" : "column" }}
+                  flexDirection={{ base: "row", md: i > 2 ? "row" : "column" }}
                   justifyContent="start"
                   alignItems="center"
                 >
                   <Box
                     borderRadius="0.8em"
                     overflow="hidden"
-                    w={{ base: 8, md: i > 1 ? 8 : 14 }}
-                    h={{ base: 8, md: i > 1 ? 8 : 14 }}
-                    minW={{ base: 8, md: i > 1 ? 8 : 14 }}
-                    minH={{ base: 8, md: i > 1 ? 8 : 14 }}
-                    maxW={{ base: 8, md: i > 1 ? 8 : 14 }}
-                    maxH={{ base: 8, md: i > 1 ? 8 : 14 }}
-                    mr={{ base: 4, md: i > 1 ? 4 : 0 }}
-                    mb={{ base: 0, md: i > 1 ? 0 : 3 }}
+                    w={{ base: 8, md: i > 2 ? 8 : 14 }}
+                    h={{ base: 8, md: i > 2 ? 8 : 14 }}
+                    minW={{ base: 8, md: i > 2 ? 8 : 14 }}
+                    minH={{ base: 8, md: i > 2 ? 8 : 14 }}
+                    maxW={{ base: 8, md: i > 2 ? 8 : 14 }}
+                    maxH={{ base: 8, md: i > 2 ? 8 : 14 }}
+                    mr={{ base: 4, md: i > 2 ? 4 : 0 }}
+                    mb={{ base: 0, md: i > 2 ? 0 : 3 }}
                   >
                     <Image src={typeof logo === "string" ? logo : void 0} />
                   </Box>
                   <Box textAlign="start" flex={1}>
                     <Text
-                      color="white"
-                      fontSize={i >= 2 ? "md" : "xl"}
+                      color="gray.800"
+                      _dark={{ color: "white" }}
+                      fontSize={i >= 3 ? "md" : "xl"}
                       fontWeight="200"
                       fontFamily="heading"
                       lineHeight={1.2}
@@ -519,38 +446,6 @@ export const SimpleDisplayWalletList = ({
             </GridItem>
           )
         })}
-        <AnimateGridItem
-          initial={false}
-          animate={
-            displayBlur
-              ? {
-                  opacity: 1,
-                  height: 2,
-                  transition: {
-                    type: "spring",
-                    duration: 0.1
-                  }
-                }
-              : {
-                  height: 0,
-                  opacity: 0,
-                  transition: {
-                    type: "spring",
-                    duration: 0.2
-                  }
-                }
-          }
-          position="sticky"
-          bg={handleChangeColorModeValue(colorMode, "#fff", " #332D2D")}
-          style={{ marginTop: 0, bg: "#332D2D" }}
-          colSpan={2}
-          w="full"
-          boxShadow={handleChangeColorModeValue(
-            colorMode,
-            "0 -3px 2px 2px #fff, 0 -4px 6px 2px #fff, 0 -4px 4px 2px #fff, 0 -5px 10px 2px #fff, 0 -8px 4px #fff, 0 -8px 6px 1px #fff, 0 -8px 8px 1px #fff",
-            "0 -3px 2px 2px #332D2D, 0 -4px 6px 2px #332D2D, 0 -4px 4px 2px #332D2D, 0 -5px 10px 2px #332D2D, 0 -8px 4px #332D2D, 0 -8px 6px 1px #332D2D, 0 -8px 8px 1px #332D2D"
-          )}
-        ></AnimateGridItem>
       </Grid>
     </AnimateBox>
   )

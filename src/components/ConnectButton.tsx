@@ -98,7 +98,7 @@ const ConnectButton: FC<ConnectButtonProps> = () => {
 
   const connectWalletBackgroundImage = useMotionValue(
     connectedWalletStorage
-      ? "linear-gradient(0deg, rgb(17, 145, 98),rgb(17, 145, 98))"
+      ? "linear-gradient(0deg, rgb(2,226,150),rgb(2,226,150))"
       : "linear-gradient(0deg, rgb(218, 32, 73),rgb(218, 32, 73))"
   )
 
@@ -106,7 +106,7 @@ const ConnectButton: FC<ConnectButtonProps> = () => {
     if (walletStatus === WalletStatus.Connected) {
       animate(
         connectWalletBackgroundImage,
-        "linear-gradient(0deg, rgb(17, 145, 98),rgb(17, 145, 98))",
+        "linear-gradient(0deg, rgb(2,226,150),rgb(2,226,150))",
         {
           duration: 0.5,
           type: "tween"
@@ -127,7 +127,7 @@ const ConnectButton: FC<ConnectButtonProps> = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [walletStatus])
 
-  const textColor = useColorModeValue("white", "white")
+  const textColor = useColorModeValue("gray.800", "gray.800")
 
   const isMobile = Boolean(breakpoint === "base" || breakpoint === "sm")
 
@@ -142,10 +142,10 @@ const ConnectButton: FC<ConnectButtonProps> = () => {
       alignItems="center"
       justifyItems="center"
       bgSize="100% 100%"
-      color={textColor}
+      color={isWalletConnected ? textColor : "white"}
       as={motion.div}
       w={{ base: "6rem", md: "10rem" }}
-      h="3.5rem"
+      h="4rem"
       onClick={async () => {
         if (isWalletConnected) return
         openView()

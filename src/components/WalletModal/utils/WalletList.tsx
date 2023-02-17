@@ -12,7 +12,6 @@ import {
 import { DisplayType } from "../types"
 
 export const getWalletListView = (
-  version: ModalVersion,
   wallet: ChainWalletBase | undefined,
   wallets: ChainWalletBase[] = [],
   setOpen: (isOpen: boolean) => void,
@@ -20,18 +19,11 @@ export const getWalletListView = (
   setQRCodeWallet: (wallet: ChainWalletBase | undefined) => void,
   initialFocus: RefObject<any>
 ) => {
-  let ModalHead: (props: SimpleModalHeadType) => JSX.Element,
-    DisplayWalletList: (props: DisplayWalletListType) => JSX.Element
-  switch (version) {
-    case "simple_v1":
-      DisplayWalletList = SimpleDisplayWalletList
-      ModalHead = SimpleModalHead
-      break
-    case "simple_v2":
-      DisplayWalletList = SimpleDisplayWalletList
-      ModalHead = SimpleModalHead
-      break
-  }
+  let ModalHead: (props: SimpleModalHeadType) => JSX.Element
+  let DisplayWalletList: (props: DisplayWalletListType) => JSX.Element
+  DisplayWalletList = SimpleDisplayWalletList
+  ModalHead = SimpleModalHead
+
   const walletsData = wallets.map(
     (w) =>
       ({
@@ -65,19 +57,15 @@ export const getWalletListView = (
     />,
     <DisplayWalletList
       initialFocus={initialFocus}
-      walletsData={
-        version === "simple_v2"
-          ? walletsData.sort((a, b) => {
-              if (a.mode === b.mode) {
-                return 0
-              } else if (a.mode !== "wallet-connect") {
-                return -1
-              } else {
-                return 1
-              }
-            })
-          : walletsData
-      }
+      walletsData={walletsData.sort((a, b) => {
+        if (a.mode === b.mode) {
+          return 0
+        } else if (a.mode !== "wallet-connect") {
+          return -1
+        } else {
+          return 1
+        }
+      })}
     />
   ]
 }

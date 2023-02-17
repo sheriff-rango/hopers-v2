@@ -26,13 +26,13 @@ export const SimpleConnectModal = ({
       onClose={modalOnClose}
       size="xl"
     >
-      <ModalOverlay bg="transparent" backdropFilter="blur(70px)" />
+      <ModalOverlay bg="blackAlpha.500" backdropFilter="blur(70px)" />
       <ModalContent
         position="relative"
         alignSelf="center"
         borderRadius="1.5em"
-        bg={handleChangeColorModeValue(colorMode, "white", "#332D2D")}
-        shadow="none"
+        bg={handleChangeColorModeValue(colorMode, "white", "gray.700")}
+        shadow="md"
         pb={4}
         mx={4}
         _focus={{ outline: "none" }}
