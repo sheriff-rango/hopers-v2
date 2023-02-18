@@ -18,29 +18,19 @@ export const CustomSwitch = ({
     marketAdvancedModeState
   )
 
-  const colorModeBgColor = useMotionValue(
-    "linear-gradient(109.8deg, rgba(253,203,50,1) 0%,  rgba(244,56,98,1) 100.2%), rgba(244,56,98,1) 100.2%)"
-  )
+  const colorModeBgColor = useMotionValue("#02e296")
 
   useEffect(() => {
     if (advancedMode) {
-      animate(
-        colorModeBgColor,
-        "linear-gradient(109.8deg, rgba(53,153,100,1) 0%, rgba(53,193,100,1) 80%, rgba(153,183,100,1) 100.2%)",
-        {
-          duration: 0.5,
-          type: "tween"
-        }
-      )
+      animate(colorModeBgColor, "#02e296", {
+        duration: 0.5,
+        type: "tween"
+      })
     } else {
-      animate(
-        colorModeBgColor,
-        "linear-gradient(109.8deg,rgba(25,55,95,1) -5.2%, rgba(25,55,105,1) -5.2%, rgba(25,55,125,1) 103.3%)",
-        {
-          duration: 0.5,
-          type: "tween"
-        }
-      )
+      animate(colorModeBgColor, "#2D3748", {
+        duration: 0.5,
+        type: "tween"
+      })
     }
   }, [advancedMode])
 
@@ -50,18 +40,19 @@ export const CustomSwitch = ({
       align="center"
       px={1}
       cursor="pointer"
-      transition="all .3s"
+      transition="all .2s"
       overflow="hidden"
       w="3rem"
       h="1.7rem"
-      rounded="2xl"
+      rounded="full"
+      shadow="md"
       onClick={() => {
         setAdvancedMode(!advancedMode)
         onToggle()
       }}
       style={{
         // @ts-expect-error Chakra Types WIP
-        backgroundImage: colorModeBgColor,
+        background: colorModeBgColor,
         justifyContent: advancedMode ? "flex-end" : "flex-start"
       }}
     >
@@ -86,7 +77,7 @@ export const CustomSwitch = ({
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 30 }}
             >
-              <Icon color="green.500" as={FaCheck} />
+              <Icon color="#02e296" as={FaCheck} />
             </Flex>
           ) : (
             <Flex
@@ -99,7 +90,7 @@ export const CustomSwitch = ({
               exit={{ opacity: 0, x: 30 }}
               style={{ width: "1rem" }}
             >
-              <Icon as={FaTimes} color="rgba(25,55,125,1)" />
+              <Icon as={FaTimes} color="#2D3748" />
             </Flex>
           )}
         </AnimatePresence>
